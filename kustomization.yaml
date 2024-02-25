@@ -3,20 +3,5 @@ kind: Kustomization
 namespace: default
 resources:
   - deployment.yaml
-patches:
-  - target:
-      kind: Deployment
-      name: nginx-deployment
-    patch: |-
-      - op: replace # replace, delete, add
-        path: /spec/replicas
-        value: 10
-  - target:
-      kind: Deployment
-      name: nginx-deployment
-    patch: |-
-      - op: replace # replace, delete, add
-        path: /spec/template/spec/containers/0
-        value: 
-          name: nginx
-          image: nginx:latest
+patchesStrategicMerge:
+  - patch.yaml
